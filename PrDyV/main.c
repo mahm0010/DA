@@ -23,7 +23,8 @@ void insercion(ivector lista, int TAM) {
 }
 
 void Merge(ivector v, ivector vizq, int tamizq, ivector vder, int tamder) {
-    int i, j, k = 0;
+    int i, j, k;
+    i = j = k = 0;
     while (i < tamizq && j < tamder) {
         if (vizq[i] < vder[j]) {
             v[k++] = vizq[i++];
