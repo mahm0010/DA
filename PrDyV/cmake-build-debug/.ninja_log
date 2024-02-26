@@ -1,0 +1,7 @@
+# ninja log v5
+8	144	7306495461910193	CMakeFiles/PrDyV.dir/main.c.obj	80e91a2e569203fc
+145	359	7306495463996987	PrDyV.exe	8af03af8c9fad86a
+28	190	7306475356567583	CMakeFiles/PrDyV.dir/ivector.c.obj	62f433199c5153f8
+25	351	7306668191538135	CMakeFiles/PrDyV.dir/main.c.obj	f8ac849afe2fc982
+32	392	7306668192151898	CMakeFiles/PrDyV.dir/ivector.c.obj	5aafa24f095f76bc
+392	689	7306668195153971	PrDyV.exe	bf82a3e09119df89
