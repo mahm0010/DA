@@ -1,0 +1,3 @@
+D:/Todo lo mio/Universidad_Local/DA/DyV_NumElementosMatriz/cmake-build-debug/CMakeFiles/DyV_NumElementosMatriz.dir
+D:/Todo lo mio/Universidad_Local/DA/DyV_NumElementosMatriz/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Todo lo mio/Universidad_Local/DA/DyV_NumElementosMatriz/cmake-build-debug/CMakeFiles/rebuild_cache.dir
