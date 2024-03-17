@@ -1,3 +1,0 @@
-C:/Universidad_Local/DA/DyV_Mergesort/cmake-build-debug/CMakeFiles/PrDyV.dir
-C:/Universidad_Local/DA/DyV_Mergesort/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Universidad_Local/DA/DyV_Mergesort/cmake-build-debug/CMakeFiles/rebuild_cache.dir

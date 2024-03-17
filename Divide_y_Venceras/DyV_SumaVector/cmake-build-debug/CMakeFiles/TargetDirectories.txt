@@ -1,3 +1,0 @@
-D:/Todo lo mio/Universidad_Local/DA/DyV_SumaVector/cmake-build-debug/CMakeFiles/DyV_SumaVector.dir
-D:/Todo lo mio/Universidad_Local/DA/DyV_SumaVector/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Todo lo mio/Universidad_Local/DA/DyV_SumaVector/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,3 +1,0 @@
-D:/Todo lo mio/Universidad_Local/DA/DyV_Mayoritario/cmake-build-debug/CMakeFiles/DyV_Mayoritario.dir
-D:/Todo lo mio/Universidad_Local/DA/DyV_Mayoritario/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Todo lo mio/Universidad_Local/DA/DyV_Mayoritario/cmake-build-debug/CMakeFiles/rebuild_cache.dir
