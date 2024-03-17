@@ -1,0 +1,11 @@
+# Directorios
+.idea/
+
+# Archivos compilados
+*.o
+*.out
+*.exe
+
+# Archivos generados por el compilador
+CMakeFiles/
+cmake-build-debug/
