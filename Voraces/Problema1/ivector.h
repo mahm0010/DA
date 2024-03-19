@@ -6,10 +6,12 @@
 #ifndef IVECTOR
 
 #define IVECTOR
+#include <stdbool.h>
 
 typedef struct {
     int tiempoLimite;
     int cobro;
+    bool escogido;
 } Pedido;
 
 typedef Pedido *ivector;
