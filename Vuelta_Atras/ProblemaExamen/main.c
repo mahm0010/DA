@@ -70,7 +70,7 @@ int main(void)
     printf("Precio productos: ");
     imprimeVector(precioproductos, numProductos);
 
-    int dinero = 50;
+    int dinero = 19;
 
     ivector sol = icreavector(numProductos);
     for (int i = 0; i < numProductos; ++i) {
@@ -99,6 +99,10 @@ int main(void)
         sumaFinal += solFinal[i] * precioproductos[i];
     }
     printf("\nLa suma final es: %d euros", sumaFinal);
+
+    ifreevector(&precioproductos);
+    ifreevector(&sol);
+    ifreevector(&solFinal);
 
     return 0;
 }
