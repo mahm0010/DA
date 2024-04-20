@@ -33,16 +33,14 @@ void MaximizarProductos(ivector precioProductos, int numProductos, int dinero, i
     }
 
     if(paso == numProductos) {
-        if(suma <= dinero) {
-            if(numProductosEscogidos > *maxNumProductos) {
-                *maxNumProductos = numProductosEscogidos;
+        if(numProductosEscogidos > *maxNumProductos) {
+            *maxNumProductos = numProductosEscogidos;
 
-                for (int i = 0; i < numProductos; ++i) {
-                    solFinal[i] = sol[i];
-                }
-
-                imprimeVector(solFinal, numProductos);
+            for (int i = 0; i < numProductos; ++i) {
+                solFinal[i] = sol[i];
             }
+
+            imprimeVector(solFinal, numProductos);
         }
     } else {
         for (int i = 0; i <= 1; ++i) {
@@ -101,6 +99,10 @@ int main(void)
         sumaFinal += solFinal[i] * precioproductos[i];
     }
     printf("\nLa suma final es: %d euros", sumaFinal);
+
+    ifreevector(&precioproductos);
+    ifreevector(&sol);
+    ifreevector(&solFinal);
 
     return 0;
 }
