@@ -1,108 +1,96 @@
 #include <stdbool.h>
 #include <stdio.h>
-
 #include "ivector.h"
 
-void imprimeVector(ivector v, int tam) {
-    for (int i = 0; i < tam; ++i) {
-        printf("%d ", v[i]);
+void ImprimeSolucion(ivector cartas, ivector solCartas, ivector solPalos, int numCartas) {
+    for (int i = 0; i < numCartas; ++i) {
+        if (solCartas[i]) {
+            printf("%d_%c ", cartas[i], "OCEB"[solPalos[i]]);
+        }
     }
     printf("\n");
 }
 
-bool Factible(ivector precioProductos, int numProductos, int dinero, ivector sol) {
-    int suma = 0;
-    for (int i = 0; i < numProductos; ++i) {
-        suma += sol[i] * precioProductos[i];
+bool Factible(ivector cartas, ivector solCartas, ivector solPalos, int numCartas) {
+    int suma = 0, contPalos[4] = {0}, cartasSeleccionadas = 0;
+
+    for (int i = 0; i < numCartas; ++i) {
+        if (solCartas[i]) {
+            suma += cartas[i];
+            cartasSeleccionadas++;
+            contPalos[solPalos[i]]++;
+        }
     }
-    if(suma <= dinero) {
-        return true;
+
+    int palosDiferentes = 0;
+    for (int i = 0; i < 4; ++i) {
+        if (contPalos[i] > 0) {
+            palosDiferentes++;
+        }
     }
-    return false;
+
+    return (cartasSeleccionadas <= 4 && palosDiferentes <= 2 && suma <= 31);
 }
 
-void MaximizarProductos(ivector precioProductos, int numProductos, int dinero, int paso, ivector sol, int *maxNumProductos, ivector solFinal) {
-    int suma = 0;
-    int numProductosEscogidos = 0;
-
-    for (int i = 0; i < numProductos; ++i) {
-        suma += sol[i] * precioProductos[i];
-        if(sol[i] == 1) {
-            ++numProductosEscogidos;
-        }
-    }
-
-    if(paso == numProductos) {
-        if(numProductosEscogidos > *maxNumProductos) {
-            *maxNumProductos = numProductosEscogidos;
-
-            for (int i = 0; i < numProductos; ++i) {
-                solFinal[i] = sol[i];
-            }
-
-            imprimeVector(solFinal, numProductos);
-        }
-    } else {
-        for (int i = 0; i <= 1; ++i) {
-            sol[paso] = i;
-            if (Factible(precioProductos, numProductos, dinero, sol)) {
-                MaximizarProductos(precioProductos, numProductos, dinero, paso+1, sol, maxNumProductos, solFinal);
+void Backtrack(ivector cartas, int numCartas, int puntuacion, int paso, ivector solCartas, ivector solPalos) {
+    if (paso == numCartas) {
+        int suma = 0;
+        for (int i = 0; i < numCartas; ++i) {
+            if (solCartas[i]) {
+                suma += cartas[i];
             }
         }
+        if (suma == puntuacion) {
+            ImprimeSolucion(cartas, solCartas, solPalos, numCartas);
+        }
+        return;
     }
-    sol[paso] = 0;
+
+    for (int i = 0; i <= 1; ++i) {
+        solCartas[paso] = i;
+        if (i == 1) {
+            for (int j = 0; j < 4; ++j) {
+                solPalos[paso] = j;
+                if (Factible(cartas, solCartas, solPalos, numCartas)) {
+                    Backtrack(cartas, numCartas, puntuacion, paso + 1, solCartas, solPalos);
+                }
+                solPalos[paso] = 0;
+            }
+        } else {
+            if (Factible(cartas, solCartas, solPalos, numCartas)) {
+                Backtrack(cartas, numCartas, puntuacion, paso + 1, solCartas, solPalos);
+            }
+        }
+        solCartas[paso] = 0;
+    }
 }
 
-int main(void)
-{
-    // Maximizar el número de  productos teniendo en cuenta que tienes n euros
-    int numProductos = 7;
-    ivector precioproductos = icreavector(numProductos);
+int main(void) {
+    int numCartas = 10;
+    ivector cartas = icreavector(numCartas);
+    cartas[0] = 1;
+    cartas[1] = 2;
+    cartas[2] = 3;
+    cartas[3] = 4;
+    cartas[4] = 5;
+    cartas[5] = 6;
+    cartas[6] = 7;
+    cartas[7] = 10;
+    cartas[8] = 11;
+    cartas[9] = 12;
 
-    precioproductos[0] = 5;
-    precioproductos[1] = 10;
-    precioproductos[2] = 15;
-    precioproductos[3] = 20;
-    precioproductos[4] = 3;
-    precioproductos[5] = 11;
-    precioproductos[6] = 1;
-
-    printf("Precio productos: ");
-    imprimeVector(precioproductos, numProductos);
-
-    int dinero = 19;
-
-    ivector sol = icreavector(numProductos);
-    for (int i = 0; i < numProductos; ++i) {
-        sol[i] = 0;
+    ivector solCartas = icreavector(numCartas);
+    ivector solPalos = icreavector(numCartas);
+    for (int i = 0; i < numCartas; ++i) {
+        solCartas[i] = 0;
+        solPalos[i] = 0;
     }
 
-    ivector solFinal = icreavector(numProductos);
-    for (int i = 0; i < numProductos; ++i) {
-        solFinal[i] = 0;
-    }
+    Backtrack(cartas, numCartas, 31, 0, solCartas, solPalos);
 
-    int maxNumProductos = -9999;
-
-    MaximizarProductos(precioproductos, numProductos, dinero, 0, sol, &maxNumProductos, solFinal);
-
-    printf("Max num productos con %d euros: %d\n", dinero, maxNumProductos);
-    //imprimeVector(solFinal, numProductos);
-    printf("Los productos escogidos son: ");
-    for (int i = 0; i < numProductos; ++i) {
-        if(solFinal[i] == 1) {
-            printf("%d ", precioproductos[i]);
-        }
-    }
-    int sumaFinal = 0;
-    for (int i = 0; i < numProductos; ++i) {
-        sumaFinal += solFinal[i] * precioproductos[i];
-    }
-    printf("\nLa suma final es: %d euros", sumaFinal);
-
-    ifreevector(&precioproductos);
-    ifreevector(&sol);
-    ifreevector(&solFinal);
+    ifreevector(&cartas);
+    ifreevector(&solCartas);
+    ifreevector(&solPalos);
 
     return 0;
 }
